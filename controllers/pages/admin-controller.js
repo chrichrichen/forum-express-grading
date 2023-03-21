@@ -1,10 +1,10 @@
 const { Restaurant, User, Category } = require('../../models')
 const { imgurFileHandler } = require('../../helpers/file-helpers')
-const adminService = require('../../services/admin-services')
+
 const adminServices = require('../../services/admin-services')
 const adminController = {
   getRestaurants: (req, res, next) => {
-    adminService.getRestaurants(req, (err, data) => err
+    adminServices.getRestaurants(req, (err, data) => err
       ? next(err)
       : res.render('admin/restaurants', data))
   },
@@ -16,7 +16,7 @@ const adminController = {
       .catch(err => next(err))
   },
   postRestaurant: (req, res, next) => {
-    adminService.postRestaurant(req, (err, data) => {
+    adminServices.postRestaurant(req, (err, data) => {
       if (err) return next(err)
       req.flash('success_messages', 'restaurant was successfully created')
       req.redirect('/admin/restaurants', data)
